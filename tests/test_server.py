@@ -54,4 +54,28 @@ class TestVoxgenSerser(JNTTServer, JNTTServerCommon):
     broker_password = 'toto'
     server_class = JNTServer
     server_conf = "tests/data/janitoo_voxgenerator.conf"
-    hadds = [HADD%(151,0), HADD%(151,1)]
+    hadds = [HADD%(151,0)]
+
+    #~ def test_010_start_heartbeat_stop(self):
+        #~ self.wipTest()
+        #~ JNTTServerCommon.test_010_start_heartbeat_stop(self)
+
+    def test_011_start_reload_stop(self):
+        self.wipTest()
+        JNTTServerCommon.test_011_server_start_no_error_in_log(self)
+
+    def test_012_start_reload_threads_stop(self):
+        self.wipTest()
+        JNTTServerCommon.test_012_start_reload_threads_stop(self)
+
+    def test_020_request_broadcast(self):
+        self.wipTest()
+        JNTTServerCommon.test_020_request_broadcast(self)
+
+    def test_030_wait_for_all_nodes(self):
+        self.wipTest()
+        JNTTServerCommon.test_030_wait_for_all_nodes(self)
+
+    def test_040_server_start_no_error_in_log(self):
+        self.wipTest()
+        JNTTServerCommon.test_040_server_start_no_error_in_log(self)
