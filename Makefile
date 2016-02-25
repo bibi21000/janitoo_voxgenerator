@@ -85,6 +85,18 @@ endif
 ifneq ('${DEBIANDEPS}','')
 	sudo apt-get install -y ${DEBIANDEPS}
 endif
+	mkdir tmp
+	cd tmp && git clone git://github.com/cmusphinx/sphinxbase.git
+	cd tmp/sphinxbase && ./autogen.sh
+	cd tmp/sphinxbase && make
+	cd tmp/sphinxbase && sudo make install
+	git clone git://github.com/cmusphinx/pocketsphinx.git
+	cd tmp/pocketsphinx && ./autogen.sh
+	cd tmp/pocketsphinx && make
+	cd tmp/pocketsphinx && sudo make install
+	cd tmp && wget http://downloads.sourceforge.net/project/cmusphinx/Acoustic%20and%20Language%20Models/French%20F0%20Broadcast%20News%20Acoustic%20Model/lium_french_f0.tar.gz
+	cd tmp && tar zxvf lium_french_f0.tar.gz
+	cd tmp && wget http://downloads.sourceforge.net/project/cmusphinx/Acoustic%20and%20Language%20Models/French%20Language%20Model/frenchWords62K.dic
 	@echo
 	@echo "Dependencies for ${MODULENAME} finished."
 
