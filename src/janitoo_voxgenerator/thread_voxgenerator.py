@@ -48,18 +48,18 @@ assert(COMMAND_DESC[COMMAND_CONTROLLER] == 'COMMAND_CONTROLLER')
 ##############################################################
 
 def make_thread(options):
-    if get_option_autostart(options, 'rpinxp') == True:
-        return NxpThread(options)
+    if get_option_autostart(options, 'voxgen') == True:
+        return VoxgenThread(options)
     else:
         return None
 
-class NxpThread(JNTBusThread):
+class VoxgenThread(JNTBusThread):
     """The NXP thread
 
     """
     def init_bus(self):
         """Build the bus
         """
-        from janitoo_raspberry_nxp.nxp import NxpBus
-        self.section = 'rpinxp'
-        self.bus = NxpBus(options=self.options, oid=self.section, product_name="Raspberry NXP controller")
+        from janitoo_raspberry_voxgenerator.voxgen import VoxgenBus
+        self.section = 'voxgen'
+        self.bus = VoxgenBus(options=self.options, oid=self.section, product_name="Raspberry voxgenerator controller")
