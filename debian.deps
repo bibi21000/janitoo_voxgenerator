@@ -1,1 +1,1 @@
-espeak espeak-data libgirepository-1.0.1 libgirepository1.0-dev libgstreamer-plugins-base0.10-0 libgstreamer-plugins-bad0.10-0 gir1.2-gstreamer-0.10 libgstreamer-plugins-base0.10-dev libgstreamer0.10-dev libgstreamer0.10-0 gstreamer0.10-alsa bison
+espeak espeak-data libgirepository-1.0.1 libgirepository1.0-dev libgstreamer-plugins-base0.10-0 libgstreamer-plugins-bad0.10-0 gir1.2-gstreamer-0.10 libgstreamer-plugins-base0.10-dev libgstreamer0.10-dev libgstreamer0.10-0 gstreamer0.10-alsa bison python-espeak python-xlib
