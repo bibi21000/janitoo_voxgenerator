@@ -43,15 +43,15 @@ from janitoo.utils import TOPIC_NODES, TOPIC_NODES_REPLY, TOPIC_NODES_REQUEST
 from janitoo.utils import TOPIC_BROADCAST_REPLY, TOPIC_BROADCAST_REQUEST
 from janitoo.utils import TOPIC_VALUES_USER, TOPIC_VALUES_CONFIG, TOPIC_VALUES_SYSTEM, TOPIC_VALUES_BASIC
 
-from janitoo_raspberry.server import PiServer
+from janitoo.server import JNTServer
 
-class TestPiSerser(JNTTServer, JNTTServerCommon):
+class TestVoxgenSerser(JNTTServer, JNTTServerCommon):
     """Test the pi server
     """
     loglevel = logging.DEBUG
     path = '/tmp/janitoo_test'
     broker_user = 'toto'
     broker_password = 'toto'
-    server_class = PiServer
+    server_class = JNTServer
     server_conf = "tests/data/janitoo_voxgenerator.conf"
     hadds = [HADD%(151,0), HADD%(151,1)]
