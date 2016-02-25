@@ -60,6 +60,6 @@ class VoxgenThread(JNTBusThread):
     def init_bus(self):
         """Build the bus
         """
-        from janitoo_raspberry_voxgenerator.voxgen import VoxgenBus
+        from janitoo_voxgenerator.voxgenerator import VoxgenBus
         self.section = 'voxgen'
-        self.bus = VoxgenBus(options=self.options, oid=self.section, product_name="Raspberry voxgenerator controller")
+        self.bus = VoxgenBus(options=self.options, oid=self.section, product_name="Voxgenerator controller")
