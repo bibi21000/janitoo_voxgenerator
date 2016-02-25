@@ -98,7 +98,7 @@ setup(
     install_requires=[
                      'janitoo',
                      'espeak',
-                     'python-xlib',
+                     #~ 'python-xlib',
                      'voxgenerator',
                     ],
     dependency_links = [
