@@ -1,0 +1,19 @@
+mkdir tmp
+cd tmp
+git clone git://github.com/cmusphinx/sphinxbase.git
+cd sphinxbase
+./autogen.sh
+make
+sudo make install
+cd ..
+git clone git://github.com/cmusphinx/pocketsphinx.git
+cd pocketsphinx
+./autogen.sh
+make
+sudo make install
+cd ..
+mkdir resources
+cd resources
+wget http://downloads.sourceforge.net/project/cmusphinx/Acoustic%20and%20Language%20Models/French%20F0%20Broadcast%20News%20Acoustic%20Model/lium_french_f0.tar.gz
+tar zxvf lium_french_f0.tar.gz
+wget http://downloads.sourceforge.net/project/cmusphinx/Acoustic%20and%20Language%20Models/French%20Language%20Model/frenchWords62K.dic
