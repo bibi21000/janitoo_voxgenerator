@@ -47,8 +47,10 @@ COMMAND_CONTROLLER = 0x1050
 assert(COMMAND_DESC[COMMAND_CONTROLLER] == 'COMMAND_CONTROLLER')
 ##############################################################
 
-def make_thread(options):
-    if get_option_autostart(options, 'voxgen') == True:
+OID = 'voxgen'
+
+def make_thread(options, force=False):
+    if get_option_autostart(options, OID) == True or force:
         return VoxgenThread(options)
     else:
         return None
@@ -61,5 +63,5 @@ class VoxgenThread(JNTBusThread):
         """Build the bus
         """
         from janitoo_voxgenerator.voxgenerator import VoxgenBus
-        self.section = 'voxgen'
+        self.section = OID
         self.bus = VoxgenBus(options=self.options, oid=self.section, product_name="Voxgenerator controller")

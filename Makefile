@@ -36,7 +36,8 @@ ifeq (${python_version_major},3)
 endif
 
 MODULENAME   = $(shell basename `pwd`)
-NOSEMODULES   = janitoo,janitoo_factory,janitoo_db
+NOSEMODULES  = janitoo,janitoo_factory,janitoo_db
+MOREMODULES  = janitoo_factory_ext
 
 DEBIANDEPS := $(shell [ -f debian.deps ] && cat debian.deps)
 BASHDEPS := $(shell [ -f bash.deps ] && echo "bash.deps")
@@ -47,8 +48,8 @@ TAGGED := $(shell git tag | grep -c v${janitoo_version} )
 
 -include Makefile.local
 
-NOSECOVER     = --cover-package=${NOSEMODULES},${MODULENAME} --with-coverage --cover-inclusive --cover-html --cover-html-dir=${BUILDDIR}/docs/html/tools/coverage --with-html --html-file=${BUILDDIR}/docs/html/tools/nosetests/index.html
-NOSEDOCKER     = --cover-package=${NOSEMODULES},${MODULENAME} --with-coverage --cover-inclusive --with-xunit --xunit-testsuite-name=${MODULENAME}
+NOSECOVER     = --cover-package=${MODULENAME} --with-coverage --cover-inclusive --cover-html --cover-html-dir=${BUILDDIR}/docs/html/tools/coverage --with-html --html-file=${BUILDDIR}/docs/html/tools/nosetests/index.html
+NOSEDOCKER     = --cover-package=${NOSEMODULES},${MODULENAME},${MOREMODULES} --with-coverage --cover-inclusive --with-xunit --xunit-testsuite-name=${MODULENAME}
 
 .PHONY: help check-tag clean all build develop install uninstall clean-doc doc certification tests pylint deps docker-tests
 
@@ -93,7 +94,7 @@ clean-doc:
 	-rm -Rf ${BUILDDIR}/janidoc
 
 janidoc:
-	ln -s /opt/janitoo/src/janidoc janidoc
+	ln -s /opt/janitoo/src/janitoo_sphinx janidoc
 
 apidoc:
 	-rm -rf ${BUILDDIR}/janidoc/source/api
@@ -129,17 +130,24 @@ develop:
 	@echo "Installation for developpers of ${MODULENAME} finished."
 
 docker-deps:
+	-test -d docker/config && cp -rf docker/config/* /opt/janitoo/etc/
+	-test -d docker/supervisor.conf.d && cp -rf docker/supervisor.conf.d/* /etc/supervisor/janitoo.conf.d/
+	-test -d docker/supervisor-tests.conf.d && cp -rf docker/supervisor-tests.conf.d/* /etc/supervisor/janitoo-tests.conf.d/
+	-test -d docker/nginx && cp -rf docker/nginx/* /etc/nginx/conf.d/
+	true
 	@echo
 	@echo "Docker dependencies for ${MODULENAME} installed."
+
+directories:
+	-mkdir /opt/janitoo
+	-for dir in cache cache/janitoo_manager home log run etc init; do mkdir /opt/janitoo/$$dir; done
+	-chown -Rf ${USER}:${USER} /opt/janitoo
 
 travis-deps:
 	sudo apt-get install -y python-pip
 	git clone https://github.com/bibi21000/janitoo_mosquitto.git
 	make -C janitoo_mosquitto deps
 	make -C janitoo_mosquitto develop
-	sudo mkdir /opt/janitoo
-	sudo chown -Rf ${USER}:${USER} /opt/janitoo
-	for dir in src cache cache/janitoo_manager home log run etc init; do mkdir /opt/janitoo/$$dir; done
 	pip install git+git://github.com/bibi21000/janitoo_nosetests@master
 	pip install git+git://github.com/bibi21000/janitoo_nosetests_flask@master
 	pip install coveralls
@@ -184,8 +192,7 @@ commit:
 	-git add rst/
 	-cp rst/README.rst .
 	-git add README.rst
-	-git commit -m "$(message)" -a
-	git push
+	git commit -m "$(message)" -a && git push
 	@echo
 	@echo "Commits for branch master pushed on github."
 
