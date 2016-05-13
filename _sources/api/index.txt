@@ -1,0 +1,30 @@
+janitoo_voxgenerator package
+============================
+
+Submodules
+----------
+
+janitoo_voxgenerator.thread_voxgenerator module
+-----------------------------------------------
+
+.. automodule:: janitoo_voxgenerator.thread_voxgenerator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+janitoo_voxgenerator.voxgenerator module
+----------------------------------------
+
+.. automodule:: janitoo_voxgenerator.voxgenerator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: janitoo_voxgenerator
+    :members:
+    :undoc-members:
+    :show-inheritance:

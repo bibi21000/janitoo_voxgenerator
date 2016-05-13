@@ -1,0 +1,18 @@
+janitoo_voxgenerator package
+============================
+
+Show janitoo's extensions.
+
+Core extensions
+---------------
+
+Threads
+^^^^^^^
+
+ - voxgen (janitoo_voxgenerator.thread_voxgenerator:make_thread)
+
+Components
+^^^^^^^^^^
+
+ - voxgen.listener (janitoo_voxgenerator.voxgenerator:make_listener)
+
